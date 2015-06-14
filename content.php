@@ -2,15 +2,21 @@
 // Bagian Home
 if ($_GET['module']=='home'){
   if ($_SESSION['leveluser']=='siswa'){
-  echo "<br><b class='judul'>Hai $_SESSION[namalengkap]</b><br><p class='garisbawah'></p>
-        Selamat datang di <b>E-Learning SMP Muhammadiyah 8 Yogyakarta</b>.<br>
+  echo "
+        <div class='navbar navbar-inner block-header'>
+          <div class='muted pull-left'>Dashboard</div>
+        </div>
+          <div class='block-content collapse in'>
+      <br><b class='judul'>Hai $_SESSION[namalengkap]</b><br><p class='garisbawah'></p>
+        Selamat datang di <b>E-Learning</b>.<br>
         <p>&nbsp;</p>
         <p>&nbsp;</p>
         <p>&nbsp;</p>
         <p>&nbsp;</p>
 
-  <p class='garisbawah'></p><p align='right'><b class='judul'>Login : $hari_ini, 
-  <span id='date'></span>, <span id='clock'></span></p>";
+      <p class='garisbawah'></p><p align='right'><b class='judul'>Login : $hari_ini
+      <span id='date'></span> <span id='clock'></span></p>
+      </div>";
   }
 }
 // Bagian kelas

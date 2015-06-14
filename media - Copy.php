@@ -48,6 +48,7 @@ else{
         <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <link href="vendors/easypiechart/jquery.easy-pie-chart.css" rel="stylesheet" media="screen">
         <link href="assets/styles.css" rel="stylesheet" media="screen">
+        <link href="assets/DT_bootstrap.css" rel="stylesheet" media="screen">
         <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
         <!--[if lt IE 9]>
             <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -78,6 +79,15 @@ else{
         <script type="text/javascript" src="js/excanvas.js"></script>
         <script type="text/javascript" src="js/cufon.js"></script>
         <script type="text/javascript" src="js/Geometr231_Hv_BT_400.font.js"></script>
+        <script src="vendors/jquery-1.9.1.js"></script>
+
+        <!-- Bootstrap -->
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        <script src="vendors/datatables/js/jquery.dataTables.min.js"></script>
+
+
+        <script src="assets/scripts.js"></script>
+        <script src="assets/DT_bootstrap.js"></script>
 
 
     <script language="javascript" type="text/javascript">
@@ -224,6 +234,8 @@ else{
                                 </div>
                             </div>
                         </div> -->
+
+                        <!-- block -->
 <!--                     <div class="row-fluid">
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
@@ -259,8 +271,10 @@ else{
                                 </div>
                             </div>
                         </div>
-                    </div>  --> 
-                        <!-- Konten PHP -->
+                    </div>  
+                        <!-- /block -->
+
+                         <!-- Konten PHP -->
                     <div class="row-fluid">
                         <!-- block -->
                         <div class="block">

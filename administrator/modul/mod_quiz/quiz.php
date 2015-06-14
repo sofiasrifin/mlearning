@@ -197,19 +197,39 @@ switch($_GET[act]){
         $mapel = mysql_query("SELECT * FROM mata_pelajaran WHERE id_kelas = '$data_siswa[id_kelas]'");
         $cek_mapel = mysql_num_rows($mapel);        
         if (!empty($cek_mapel)){
-            echo"<br><b class='judul'>Tugas / Quiz</b><br><p class='garisbawah'></p>
-            <table>
-            <tr><th>No</th><th>Mata Pelajaran</th><th>Aksi</th></tr>";
+        echo '
+            <div class="navbar navbar-inner block-header">
+              <div class=muted pull-left>Tugas / Quiz</div>
+            </div>            
+            <div class="block-content collapse in">
+              <table class="table table-striped table-bordered">
+              <thead>
+              <tr>
+                <th>No</th>
+                <th>Mata Pelajaran</th>
+                <th>Aksi</th>
+              </tr>
+              </thead>';
             $no=1;
             while ($t=mysql_fetch_array($mapel)){                
-                echo "<tr><td>$no</td>
-                        <td>$t[nama]</td>";                   
+              echo "<tbody>
+                      <tr>
+                        <td>$no</td>
+                        <td>$t[nama]</td>";
+                      echo'  <td>                  
+                          <button class="btn" onclick=\'window.location.href="?module=quiz&act=daftartopik&id=$t[id_matapelajaran]&id_kelas=$data_siswa[id_kelas]";\'>
+                        <i class="icon-zoom-in"></i> Lihat Tugas / Quiz</button>
+                        </td>
+                      </tr>
+                      </tbody>';
+                  
                         
-                        echo"<td><input type=button class='tombol' value='Lihat Tugas / Quiz'
-                       onclick=\"window.location.href='?module=quiz&act=daftartopik&id=$t[id_matapelajaran]&id_kelas=$data_siswa[id_kelas]';\"></td></tr>";
+                       //  echo"<td><input type=button class='tombol' value='Lihat Tugas / Quiz'
+                       // onclick=\"window.location.href='?module=quiz&act=daftartopik&id=$t[id_matapelajaran]&id_kelas=$data_siswa[id_kelas]';\"></td></tr>";
             $no++;
             }
-            echo"</table>";
+            echo"</table>
+                </div>";
         }else{
             echo "<script>window.alert('Belum ada mata pelajaran di kelas anda.');
                     window.location=(href='media.php?module=home')</script>";

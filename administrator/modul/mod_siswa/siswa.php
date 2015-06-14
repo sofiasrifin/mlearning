@@ -383,45 +383,86 @@ case "tambahsiswa":
        $get_kelas = mysql_query("SELECT * FROM kelas WHERE id_kelas = '$siswa[id_kelas]'");
        $kelas = mysql_fetch_array($get_kelas);
        
-       echo "<form><fieldset>
-          <legend>Detail Siswa</legend>
-          <dl class='inline'>
-          <dt><label>Nis</label></dt>        <dd> : $siswa[nis]</dd>
-          <dt><label>Nama</label></dt>               <dd> : $siswa[nama_lengkap]</dd>
-          <dt><label>Username Login</label></dt>     <dd> : $siswa[username_login]</dd>
-          <dt><label>Kelas</label></dt>              <dd> : <a href=?module=kelas&act=detailkelas&id=$siswa[id_kelas]>$kelas[nama]</a></dd>
-          <dt><label>Alamat</label></dt>             <dd> : $siswa[alamat]</dd>
-          <dt><label>Jabatan</label></dt>            <dd> : $siswa[jabatan]</dd>
-          <dt><label>Tempat Lahir</label></dt> <dd> : $siswa[tempat_lahir]</dd>
-          <dt><label>Tanggal Lahir</label></dt><dd> : $tgl_lahir</dd>";
-          if ($siswa[jenis_kelamin]=='P'){
-           echo "<dt><label>Jenis Kelamin</label></dt>     <dd>  : Perempuan</dd>";
-            }
-            else{
-           echo "<dt><label>Jenis kelamin</label></dt>     <dd> :  Laki - Laki </dd>";
-            }echo"
-          <dt><label>Agama</label></dt>             <dd> : $siswa[agama]</dd>
-          <dt><label>Nama Ayah/Wali</label></dt>     <dd> : $siswa[nama_ayah]</dd>
-          <dt><label>Nama Ibu</label></dt>           <dd> : $siswa[nama_ibu]</dd>
-          <dt><label>Tahun Masuk</label></dt>        <dd> : $siswa[th_masuk]</dd>
-          <dt><label>E-Mail</label></dt>             <dd> : <a href=mailto:$siswa[email]>$siswa[email]</a></dd>
-          <dt><label>No.Telp/Hp</label></dt>         <dd> : $siswa[no_telp]</dd>
-          <dt><label>Blokir</label></dt>             <dd> : $siswa[blokir]</dd>
-          <dt><label>Foto</label></dt>             <dd> :
-          <ul class='photos sortable'>
-              <li>";if ($siswa[foto]!=''){
-              echo "<img src='../foto_siswa/medium_$siswa[foto]'>
-              <div class='links'>
-                    <a href='../foto_siswa/medium_$siswa[foto]' rel='facebox'>View</a>
-              <div>
-              </li>
-              </ul></dd>";
-          }
-          echo "</dl>
-          <div class='buttons'>
-          <input class='button blue' type=button value=Kembali onclick=self.history.back()>
-          </div>
-          </fieldset></form>";
+       echo "<form>
+            <div class='navbar navbar-inner block-header'>
+              <div class=muted pull-left>Detail Siswa</div>
+            </div>            
+            <div class='block-content collapse in'>
+              <table class='table'>
+                <thead>
+                  <tr>
+                    <td>Nis</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Nama</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Username</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Kelas</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Alamat</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Jabatan</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </thead>
+              </table>
+            </div>";
+
+          // <fieldset>
+          // <legend>Detail Siswa</legend>
+          // <dl class='inline'>
+          // <dt><label>Nis</label></dt>        <dd> : $siswa[nis]</dd>
+          // <dt><label>Nama</label></dt>               <dd> : $siswa[nama_lengkap]</dd>
+          // <dt><label>Username Login</label></dt>     <dd> : $siswa[username_login]</dd>
+          // <dt><label>Kelas</label></dt>              <dd> : <a href=?module=kelas&act=detailkelas&id=$siswa[id_kelas]>$kelas[nama]</a></dd>
+          // <dt><label>Alamat</label></dt>             <dd> : $siswa[alamat]</dd>
+          // <dt><label>Jabatan</label></dt>            <dd> : $siswa[jabatan]</dd>
+          // <dt><label>Tempat Lahir</label></dt> <dd> : $siswa[tempat_lahir]</dd>
+          // <dt><label>Tanggal Lahir</label></dt><dd> : $tgl_lahir</dd>";
+          // if ($siswa[jenis_kelamin]=='P'){
+          //  echo "<dt><label>Jenis Kelamin</label></dt>     <dd>  : Perempuan</dd>";
+          //   }
+          //   else{
+          //  echo "<dt><label>Jenis kelamin</label></dt>     <dd> :  Laki - Laki </dd>";
+          //   }echo"
+          // <dt><label>Agama</label></dt>             <dd> : $siswa[agama]</dd>
+          // <dt><label>Nama Ayah/Wali</label></dt>     <dd> : $siswa[nama_ayah]</dd>
+          // <dt><label>Nama Ibu</label></dt>           <dd> : $siswa[nama_ibu]</dd>
+          // <dt><label>Tahun Masuk</label></dt>        <dd> : $siswa[th_masuk]</dd>
+          // <dt><label>E-Mail</label></dt>             <dd> : <a href=mailto:$siswa[email]>$siswa[email]</a></dd>
+          // <dt><label>No.Telp/Hp</label></dt>         <dd> : $siswa[no_telp]</dd>
+          // <dt><label>Blokir</label></dt>             <dd> : $siswa[blokir]</dd>
+          // <dt><label>Foto</label></dt>             <dd> :
+          // <ul class='photos sortable'>
+          //     <li>";if ($siswa[foto]!=''){
+          //     echo "<img src='../foto_siswa/medium_$siswa[foto]'>
+          //     <div class='links'>
+          //           <a href='../foto_siswa/medium_$siswa[foto]' rel='facebox'>View</a>
+          //     <div>
+          //     </li>
+          //     </ul></dd>";
+          // }
+          // echo "</dl>
+          // <div class='buttons'>
+          // <input class='button blue' type=button value=Kembali onclick=self.history.back()>
+          // </div>
+          // </fieldset></form>";
     }
     elseif ($_SESSION[leveluser]=='pengajar'){
        $detail=mysql_query("SELECT * FROM siswa WHERE id_siswa='$_GET[id]'");
@@ -474,31 +515,55 @@ case "tambahsiswa":
        $get_kelas = mysql_query("SELECT * FROM kelas WHERE id_kelas = '$siswa[id_kelas]'");
        $kelas = mysql_fetch_array($get_kelas);
 
-      echo"<br><b class='judul'>Detail Siswa</b><br><p class='garisbawah'></p>
-       <table>
-             <tr><td rowspan='14'>";if ($siswa[foto]!=''){
+      echo"
+            <div class='navbar navbar-inner block-header'>
+              <div class=muted pull-left>Detail Siswa</div>
+            </div>            
+            <div class='block-content collapse in'>
+              <table table-striped table-bordered>
+                <tbody>
+                 <tr>
+                  <td rowspan='15'>
+                      ";
+             if ($siswa['foto']!=''){
               echo "<img src='foto_siswa/medium_$siswa[foto]'>";
-          }echo "</td><td>Nis</td>        <td> : $siswa[nis]</td></tr>
-          <tr><td>Nama</td>               <td> : $siswa[nama_lengkap]</td></tr>          
-          <tr><td>Kelas</td>              <td> : $kelas[nama]</td></tr>
-          <tr><td>alamat</td>             <td> : $siswa[alamat]</td></tr>
-          <tr><td>Tempat Lahir</td> <td> : $siswa[tempat_lahir]</td></tr>
-          <tr><td>Tanggal Lahir</td><td> : $tgl_lahir</td></tr>";
+          }echo "</td></tr>
+                <tr class='success'>
+                  <td>Nis</td>        <td> : $siswa[nis]</td></tr>
+                <tr class='error'>
+                  <td>Nama</td>               <td> : $siswa[nama_lengkap]</td></tr>          
+                <tr class='success'>
+                  <td>Kelas</td>              <td> : $kelas[nama]</td></tr>
+                <tr class='error'>
+                  <td>alamat</td>             <td> : $siswa[alamat]</td></tr>
+                <tr class='success'>
+                  <td>Tempat Lahir</td> <td> : $siswa[tempat_lahir]</td></tr>
+                <tr class='error'>
+                  <td>Tanggal Lahir</td><td> : $tgl_lahir</td></tr>";
           if ($siswa[jenis_kelamin]=='P'){
-           echo "<tr><td>Jenis Kelamin</td>     <td>  : Perempuan</td></tr>";
+           echo "<tr class='success'>
+                  <td>Jenis Kelamin</td>     <td>  : Perempuan</td></tr>";
             }
             else{
-           echo "<tr><td>Jenis kelamin</td>     <td> :  Laki - Laki </td></tr>";
+           echo "<tr class='success'><td>Jenis kelamin</td>     <td> :  Laki - Laki </td></tr>";
             }echo"
-          <tr><td>Agama</td>              <td> : $siswa[agama]</td></tr>
-          <tr><td>Nama Ayah/Wali</td>     <td> : $siswa[nama_ayah]</td></tr>
-          <tr><td>Nama Ibu</td>           <td> : $siswa[nama_ibu]</td></tr>
-          <tr><td>Tahun Masuk</td>        <td> : $siswa[th_masuk]</td></tr>
-          <tr><td>E-Mail</td>             <td> : <a href=mailto:$siswa[email]>$siswa[email]</a></td></tr>
-          <tr><td>No.Telp/Hp</td>         <td> : $siswa[no_telp]</td></tr>
-          <tr><Td>Jabatan</td>            <td> : $siswa[jabatan]</td></tr>";
-          echo"<tr><td colspan='3'><input type=button class='tombol' value='Kembali'
-          onclick=self.history.back()></td></tr></table>";
+                <tr class='error'><td>Agama</td>              <td> : $siswa[agama]</td></tr>
+                <tr class='success'><td>Nama Ayah/Wali</td>     <td> : $siswa[nama_ayah]</td></tr>
+                <tr class='error'><td>Nama Ibu</td>           <td> : $siswa[nama_ibu]</td></tr>
+                <tr class='success'><td>Tahun Masuk</td>        <td> : $siswa[th_masuk]</td></tr>
+                <tr class='error'><td>E-Mail</td>             <td> : <a href=mailto:$siswa[email]>$siswa[email]</a></td></tr>
+                <tr class='success'><td>No.Telp/Hp</td>         <td> : $siswa[no_telp]</td></tr>
+                <tr class='error'><Td>Jabatan</td>            <td> : $siswa[jabatan]</td></tr>
+                </tbody>";
+                echo"<tr>
+                  <td colspan='3'>
+                    <button class='btn btn-primary' onclick=self.history.back()>Kembali</button>                  
+                  </td>
+                </tr>
+              </table>
+            </div>";
+                //     <input type=button class='tombol' value='Kembali'
+                // onclick=self.history.back()>
 
     }
     break;
@@ -513,7 +578,12 @@ case "detailprofilsiswa":
        $kelas = mysql_fetch_array($get_kelas);
 
       echo"<br><b class='judul'>Detail Siswa</b><br><p class='garisbawah'></p>
-       <table>
+            <div class='navbar navbar-inner block-header'>
+              <div class=muted pull-left>Detail Siswa</div>
+            </div>            
+            <div class='block-content collapse in'>
+       <table class='table'>
+          <tbody>
              <tr><td rowspan='14'>";if ($siswa[foto]!=''){
               echo "<img src='foto_siswa/medium_$siswa[foto]'>";
           }echo "</td><td>Nis</td>        <td> : $siswa[nis]</td></tr>
@@ -534,8 +604,12 @@ case "detailprofilsiswa":
           <tr><td>Tahun Masuk</td>        <td> : $siswa[th_masuk]</td></tr>
           <tr><td>E-Mail</td>             <td> : <a href=mailto:$siswa[email]>$siswa[email]</a></td></tr>
           <tr><td>No.Telp/Hp</td>         <td> : $siswa[no_telp]</td></tr>
-          <tr><td>Jabatan</td>            <td> : $siswa[jabatan]</td></tr>";
-          echo"<tr><td colspan='3'><input type=button class='tombol' value='Edit Profil' onclick=\"window.location.href='?module=siswa&act=editsiswa&id=$siswa[id_siswa]';\"></td></tr></table>";
+          <tr><td>Jabatan</td>            <td> : $siswa[jabatan]</td></tr>
+          </tbody>";
+          echo"<tr><td colspan='3'>
+                    <button class='btn btn-primary' onclick=\"window.location.href='?module=siswa&act=editsiswa&id=$siswa[id_siswa]';\">Edit Profil</button>                  
+                    </td></tr></table>
+                    </div>";
     }
     break;
 

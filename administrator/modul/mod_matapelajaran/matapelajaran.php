@@ -136,12 +136,26 @@ switch($_GET[act]){
         $siswa = mysql_query("SELECT * FROM siswa WHERE id_siswa = $_SESSION[idsiswa]");
         $data_siswa = mysql_fetch_array($siswa);
         $tampil_pelajaran = mysql_query("SELECT * FROM mata_pelajaran WHERE id_kelas = '$data_siswa[id_kelas]'");
-        echo"<br><b class='judul'>Daftar Mata Pelajaran di Kelas Anda</b><br><p class='garisbawah'></p>";
-        echo "<table>
-          <tr><th>No</th><th>Nama</th><th>Pengajar</th><th>Deskripsi</th></tr>";
+
+        echo '
+            <div class="navbar navbar-inner block-header">
+              <div class=muted pull-left>Daftar Mata Pelajaran di Kelas Anda</div>
+            </div>            
+            <div class="block-content collapse in">
+              <table class="table table-striped table-bordered">
+                <thead>      
+                <tr>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>Pengajar</th>
+                  <th>Deskripsi</th>
+                </tr>
+                </thead>';
         $no=1;
         while ($r=mysql_fetch_array($tampil_pelajaran)){
-        echo "<tr><td>$no</td>
+        echo "
+            <tbody>
+            <tr><td>$no</td>
              <td>$r[nama]</td>";             
              $pengajar = mysql_query("SELECT * FROM pengajar WHERE id_pengajar = '$r[id_pengajar]'");
              $cek_pengajar = mysql_num_rows($pengajar);
@@ -152,10 +166,13 @@ switch($_GET[act]){
              }else{
                  echo"<td></td>";
              }
-             echo "<td>$r[deskripsi]</td>";
+             echo "<td>$r[deskripsi]</td>
+            </tr>
+            </tbody>";
         $no++;
         }
-        echo "</table>";
+        echo "</table>
+              </div>";
     }
     break;
 

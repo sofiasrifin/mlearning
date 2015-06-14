@@ -210,23 +210,40 @@ switch($_GET[act]){
     }
     
     else{
-        echo"<br><b class='judul'>Materi</b><br><p class='garisbawah'></p>";
 
         $ambil_siswa = mysql_query("SELECT * FROM siswa WHERE id_siswa = '$_SESSION[idsiswa]'");
         $data_siswa = mysql_fetch_array($ambil_siswa);
 
         $mapel = mysql_query("SELECT * FROM mata_pelajaran WHERE id_kelas = '$data_siswa[id_kelas]'");
-       echo "<table>
-          <tr><th>No</th><th>Mata Pelajaran</th><th>Materi</th></tr>";
+       echo '
+            <div class="navbar navbar-inner block-header">
+              <div class=muted pull-left>Materi</div>
+            </div>            
+            <div class="block-content collapse in">
+              <table class="table table-striped table-bordered">
+                <thead> 
+                  <tr>
+                    <th>No</th>
+                    <th>Mata Pelajaran</th>
+                    <th>Materi</th>
+                  </tr>
+                </thead>';
         $no=1;
         while ($r=mysql_fetch_array($mapel)){
-        echo "<tr><td>$no</td>
-             <td>$r[nama]</td>";
-             echo "<td><input type=button class='tombol' value='Lihat File Materi'
-                       onclick=\"window.location.href='?module=materi&act=daftarmateri&id=$r[id_matapelajaran]';\"></td></tr>";
+        echo "<tbody><tr>
+              <td>$no</td>
+              <td>$r[nama]</td>";
+             echo '<td>
+                      <button class="btn" onclick=\'window.location.href="?module=materi&act=daftarmateri&id=$r[id_matapelajaran]";\'>
+                      <i class="icon-zoom-in"></i> Lihat File Materi</button>
+                  </td>
+                  </tr>';
+                // <input type=button class='tombol' value='Lihat File Materi'
+                //        onclick=\"window.location.href='?module=materi&act=daftarmateri&id=$r[id_matapelajaran]';\"></td></tr>";
         $no++;
         }
-        echo "</table>";
+        echo "</table>
+            </div>";
 
 
     }

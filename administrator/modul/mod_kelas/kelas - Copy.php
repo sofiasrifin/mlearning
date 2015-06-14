@@ -57,14 +57,14 @@ switch($_GET[act]){
     if ($_SESSION[leveluser]=='admin'){
       $tampil = mysql_query("SELECT * FROM kelas ORDER BY id_kelas");
 
-      echo "
-          <div class='navbar navbar-inner block-header'>
-            <div class='muted pull-left'>Manajemen Kelas</div>
+      echo '
+          <div class="navbar navbar-inner block-header">
+            <div class="muted pull-left">Manajemen Kelas</div>
           </div>
-          <button class='btn btn-success'>Button</button>
-          <input type=button class='button blue' value='Tambah Kelas' onclick=\"window.location.href='?module=kelas&act=tambahkelas';\">";
-      echo "<br><br>
-          <table id='table1' class='gtable sortable'>
+          <button class="btn btn-success" onclick=\'window.location.href="?module=kelas&act=tambahkelas";\'>Tambah Kelas</button>';
+      echo '
+        <div class="block-content collapse in">
+          <table class="table table-striped">
           <thead>
               <tr>
                 <th>No</th>
@@ -74,12 +74,14 @@ switch($_GET[act]){
                 <th>Ketua Kelas</th>
                 <th>Aksi</th>
               </tr>
-              </thead>";
+          </thead>';
     $no=1;
     while ($r=mysql_fetch_array($tampil)){       
-       echo "<tr><td>$no</td>
-             <td>$r[id_kelas]</td>
-             <td>$r[nama]</td>";
+       echo "<tbody>
+            <tr>
+               <td>$no</td>
+               <td>$r[id_kelas]</td>
+               <td>$r[nama]</td>";
              $pengajar = mysql_query("SELECT * FROM pengajar WHERE id_pengajar = '$r[id_pengajar]'");
                     $ada_pengajar = mysql_num_rows($pengajar);
                     if(!empty($ada_pengajar)){
@@ -99,28 +101,48 @@ switch($_GET[act]){
                     }else{
                             echo"<td></td>";
                     }
-             echo "<td><a href='?module=kelas&act=editkelas&id=$r[id]' title='Edit'><img src='images/icons/edit.png' alt='Edit' /></a> |
-                 <a href=javascript:confirmdelete('$aksi?module=kelas&act=hapuskelas&id=$r[id]') title='Hapus'><img src='images/icons/cross.png' alt='Delete' /></a> |
-                 <a href=?module=daftarsiswa&act=lihatmurid&id=$r[id_kelas]>Lihat Siswa</a></td></tr>";
+             echo '<td>
+                      <button class="btn btn-primary" onclick=\'window.location.href="?module=kelas&act=editkelas&id=$r[id]";\'><i class="icon-pencil icon-white"></i> Edit</button>
+                      <button class="btn btn-danger" onclick=\'javascript:confirmdelete("$aksi?module=kelas&act=hapuskelas&id=$r[id]")\'><i class="icon-remove icon-white"></i> Hapus</button>
+                      <button class="btn" onclick=\'window.location.href="?module=siswa&act=lihatmurid&id=$r[id_kelas]";\'>
+                      <i class="icon-zoom-in"></i> Lihat Teman</button>
+                   </td>
+                 </tr>
+            </tbody>';
       $no++;
       
     }
-    echo "</table>";
+    echo "</table>
+          </div>";
     }
     elseif ($_SESSION[leveluser]=='pengajar'){
-         echo"<h2>Kelas yang anda ampu</h2><hr>
-         <input type=button class='button blue' value='Tambah Kelas' onclick=\"window.location.href='?module=kelas&act=tambahkelas';\">";
+         echo'    
+             <div class="navbar navbar-inner block-header">
+                <div class="muted pull-left">Kelas yang anda ampu</div>
+              </div>
+          <button class="btn btn-success" onclick=\'window.location.href="?module=kelas&act=tambahkelas";\'>Tambah Kelas</button>';
 
          $tampil_kelas = mysql_query("SELECT * FROM kelas WHERE id_pengajar = '$_SESSION[idpengajar]'");
          $ketemu=mysql_num_rows($tampil_kelas);
          if (!empty($ketemu)){
-                echo "<br><br><table id='table1' class='gtable sortable'><thead>
-                <tr><th>No</th><th>Kelas</th><th>Wali Kelas</th><th>Ketua Kelas</th><th>Aksi</th></tr></thead>";
+                echo '<div class="block-content collapse in">
+                      <table id='table1' class='gtable sortable'>
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Kelas</th>
+                            <th>Wali Kelas</th>
+                            <th>Ketua Kelas</th>
+                            <th>Aksi</th>
+                          </tr>
+                        </thead>';
 
                 $no=1;
                 while ($r=mysql_fetch_array($tampil_kelas)){
-                    echo "<tr><td>$no</td>
-                    <td>$r[nama]</td>";
+                    echo "<tbody>
+                            <tr>
+                            <td>$no</td>
+                            <td>$r[nama]</td>";
 
                     $pengajar = mysql_query("SELECT * FROM pengajar WHERE id_pengajar = '$_SESSION[idpengajar]'");
                     $ada_pengajar = mysql_num_rows($pengajar);
@@ -141,12 +163,15 @@ switch($_GET[act]){
                     }else{
                             echo"<td></td>";
                     }
-                    echo "<td><a href='?module=kelas&act=editkelas&id=$r[id]' title='Edit'><img src='images/icons/edit.png' alt='Edit' /></a>|
-                        <a href=javascript:confirmdelete('$aksi_kelas?module=kelas&act=hapuswalikelas&id=$r[id]') title='Hapus'><img src='images/icons/cross.png' alt='Delete' /></a> |
-                        <input class='button small white' type=button value='Lihat Siswa' onclick=\"window.location.href='?module=daftarsiswa&act=lihatmurid&id=$r[id_kelas]';\">";
+                    echo '<td>
+                      <button class="btn btn-primary" onclick=\'window.location.href="?module=kelas&act=editkelas&id=$r[id]";\'><i class="icon-pencil icon-white"></i> Edit</button>
+                      <button class="btn btn-danger" onclick=\'javascript:confirmdelete("$aksi?module=kelas&act=hapuskelas&id=$r[id]")\'><i class="icon-remove icon-white"></i> Hapus</button>
+                      <button class="btn" onclick=\'window.location.href="?module=siswa&act=lihatmurid&id=$r[id_kelas]";\'>
+                      <i class="icon-zoom-in"></i> Lihat Teman</button>';
                 $no++;
                 }
-                echo "</table>";
+                echo "</table>
+                      </div>";
                 }else{
                     echo "<script>window.alert('Tidak ada kelas yang anda ampu,kembali ke home untuk menambah');
                     window.location=(href='?module=home')</script>";
@@ -274,7 +299,7 @@ switch($_GET[act]){
     $getnis = mysql_query("SELECT * FROM siswa WHERE id_siswa = '$r[id_siswa]'");
     $niss = mysql_fetch_array($getnis);
     
-    echo "<form method=POST action='$aksi?module=kelas&act=update_kelas'>
+    echo '<form method=POST action="$aksi?module=kelas&act=update_kelas">
           <input type=hidden name=id value='$r[id]'>
           <fieldset>
           <legend>Edit Kelas</legend>
@@ -293,13 +318,11 @@ switch($_GET[act]){
                                       $tampil_siswa=mysql_query("SELECT * FROM siswa ORDER BY nama_lengkap");
                                       while($s=mysql_fetch_array($tampil_siswa)){
                                       echo "<option value=$s[id_siswa]>$s[nama_lengkap]</option>";
-                                      }echo "</select></dd>
+                                      }echo '</select></dd>
           </dl>
-          <div class='buttons'>
-          <input class='button blue' type=submit value=Update>
-          <input class='button blue' type=button value=Batal onclick=self.history.back()>
-          </div>
-          </fieldset></form>";
+          <button class="btn btn-inverse">Update</button>
+          <button class="btn" onclick=self.history.back()> Batal</button>
+          </fieldset></form>';
     }
     elseif ($_SESSION[leveluser]=='pengajar'){
     $tampil = mysql_query("SELECT * FROM kelas WHERE id = '$_GET[id]'");
@@ -333,50 +356,21 @@ switch($_GET[act]){
          </dl></fieldset</form>";
     }
     elseif ($_SESSION[leveluser]=='siswa'){
-         echo'
-            <div class="navbar navbar-inner block-header">
-              <div class=muted pull-left>Edit Kelas</div>
-            </div>            
-           <form method=POST action="$aksi_siswa?module=siswa&act=update_kelas_siswa">';
-           $tampil = mysql_query("SELECT * FROM kelas WHERE id = '$_GET[id]'");
-           $r = mysql_fetch_array($tampil);
-           echo '
-              <div class="block-content collapse in">
-                          <label class="control-label" for="selectError">Kelas</label>
-                          <div class="controls">
-                            <select id="selectError">
-                                          <option value='.$r['id_kelas'].' selected>'.$r['nama'].'</option>';
-                                  $tampilk = mysql_query("SELECT * FROM kelas ORDER BY id_kelas");
-                                          while($t=mysql_fetch_array($tampilk)){
-                                                echo '<option value="'.$t['id_kelas'].'">'.$r['nama'].'</option>';
-                                          }
-                        echo'</select>
-                          </div>
-              </div>';
-                
-
-          //       <table class="table table-striped table-bordered">
-          //         <tbody>
-          //         <tr>
-          //           <td>Kelas </td>   
-          //           <td>: 
-          //           <select name="id_kelas">
-          //                                 <option value="$r[id_kelas]" selected>$r[nama]</option>';
-          //                                 $tampilk = mysql_query("SELECT * FROM kelas ORDER BY id_kelas");
-          //                                 while($t=mysql_fetch_array($tampilk)){
-          //                                       echo '<option value=$t[id_kelas]>$t[nama]</option>';
-          //                                 }echo'</select>
-          //           </td>
-          //         </tr>
-          //         <tr>
-          //           <td colspan=2>
-          //             <button class="btn btn-inverse"> Update</button>
-          //             <button class="btn" onclick=self.history.back()> Batal</button>
-          //           </td>
-          //         </tr>
-          //         </tbody>
-          // </form>
-          //       </table>';
+         echo"<br><b class='judul'>Edit Kelas</b><br><p class='garisbawah'></p>
+         <form method=POST action='$aksi_siswa?module=siswa&act=update_kelas_siswa'>";
+         $tampil = mysql_query("SELECT * FROM kelas WHERE id = '$_GET[id]'");
+         $r = mysql_fetch_array($tampil);
+         echo "<table>
+          <tr><td>Kelas </td>   <td>: <select name='id_kelas'>
+                                      <option value='$r[id_kelas]' selected>$r[nama]</option>";
+                                      $tampilk = mysql_query("SELECT * FROM kelas ORDER BY id_kelas");
+                                      while($t=mysql_fetch_array($tampilk)){
+                                            echo "<option value=$t[id_kelas]>$t[nama]</option>";
+                                      }echo"</select></td></tr>
+        <tr><td colspan=2><input type=submit class='tombol' value='Update'>
+                          <input type=button class='tombol' value='Batal'
+                          onclick=self.history.back()></td></tr>
+        </form></table>";
     }
     break;
 

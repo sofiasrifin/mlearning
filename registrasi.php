@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<title>Administrator SMP Muhdela</title>
+<title>.::E-Learning::.</title>
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="administrator/css/style_register.css">
 <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
